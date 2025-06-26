@@ -30,4 +30,10 @@ defmodule TasksAppWeb.TaskControllerTest do
     conn = get(conn, ~p"/tasks/#{task.id}")
     assert html_response(conn, 200) =~ task.title
   end
+
+  test "GET /tasks/:id/edit renders edit form", %{conn: conn} do
+    {:ok, task} = Tasks.create_task(@valid_attrs)
+    conn = get(conn, ~p"/tasks/#{task.id}/edit")
+    assert html_response(conn, 200) =~ "Edit Task"
+  end
 end

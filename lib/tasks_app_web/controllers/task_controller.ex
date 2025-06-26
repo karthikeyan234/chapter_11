@@ -29,4 +29,24 @@ defmodule TasksAppWeb.TaskController do
     task = Tasks.get_task!(id)
     render(conn, :show, task: task)
   end
+
+  def edit(conn, %{"id" => id}) do
+    task = Tasks.get_task!(id)
+    changeset = Tasks.change_task(task)
+    render(conn, :edit, task: task, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "task" => task_params}) do
+    task = Tasks.get_task!(id)
+
+    case Tasks.update_task(task, task_params) do
+      {:ok, task} ->
+        conn
+        |> put_flash(:info, "Task updated successfully.")
+        |> redirect(to: ~p"/tasks/#{task.id}")
+
+      {:error, changeset} ->
+        render(conn, :edit, task: task, changeset: changeset)
+    end
+  end
 end

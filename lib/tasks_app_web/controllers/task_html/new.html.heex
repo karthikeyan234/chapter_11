@@ -1,12 +1,6 @@
 <.header>New Task</.header>
 
-<.simple_form
-  :let={f}        
-  for={@changeset}
-  as={:task}
-  action={~p"/tasks"}
-  method="post"
->
+<.simple_form :let={f} for={@changeset} as={:task} action={~p"/tasks"} method="post">
   <.input field={f[:title]} type="text" label="Title" required />
   <.input field={f[:description]} type="textarea" label="Description" />
 
@@ -14,12 +8,3 @@
     <.button>Create Task</.button>
   </:actions>
 </.simple_form>
-
-
-
-
-
-
-
-
-
