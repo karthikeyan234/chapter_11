@@ -1,0 +1,7 @@
+<.header>Listing Tasks</.header>
+
+<div>
+  <%= for task <- @tasks do %>
+    <TasksAppWeb.TaskComponents.task_card task={task} />
+  <% end %>
+</div>
