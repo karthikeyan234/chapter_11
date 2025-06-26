@@ -49,4 +49,14 @@ defmodule TasksAppWeb.TaskController do
         render(conn, :edit, task: task, changeset: changeset)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    task = Tasks.get_task!(id)
+    {:ok, _task} = Tasks.delete_task(task)
+
+    conn
+    |> put_flash(:info, "Task deleted successfully.")
+    |> redirect(to: ~p"/tasks")
+  end
+
 end
